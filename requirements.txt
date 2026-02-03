@@ -1,0 +1,9 @@
+# Core database dependencies
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Configuration and environment
+python-dotenv>=1.0.0
+
+# Database migrations (backup to Flyway)
+alembic>=1.13.0
