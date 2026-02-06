@@ -9,6 +9,7 @@ class RecentExample(TypedDict):
 
 class State(TypedDict, total=False):
     # Inputs
+    initial_prompt_id: str
     initial_prompt_content: str
     eval_prompt_id: str
     eval_prompt_content: str

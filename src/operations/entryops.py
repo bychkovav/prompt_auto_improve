@@ -2,7 +2,7 @@ from sqlalchemy import select
 
 from src.models.entry import Entry
 
-def db_get_next_entry(session, skip: int) -> Optional[dict]:
+def get_next_entry(session, skip: int) -> Optional[dict]:
     q = (
         select(Entry)
         .order_by(Entry.id.asc())

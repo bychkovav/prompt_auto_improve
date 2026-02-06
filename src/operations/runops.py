@@ -5,7 +5,7 @@ from sqlalchemy import select, exists, and_
 from sqlalchemy.exc import NoResultFound
 
 
-def db_create_run(session, initial_prompt_id: str, eval_prompt_id: str) -> dict:
+def create_run(session, initial_prompt_id: str, eval_prompt_id: str) -> dict:
     q = (
         select(PromptVersion)
         .where(PromptVersion.id == initial_prompt_id)
@@ -37,8 +37,8 @@ def db_create_run(session, initial_prompt_id: str, eval_prompt_id: str) -> dict:
 
     return {
         "run_id": str(run.id),
-        "result_prompt_id": str(run.result_prompt_id),
-        "result_prompt_content": initial_prompt.content,
+        "initial_prompt_id": str(run.initial_prompt_id),
+        "initial_prompt_content": initial_prompt.content,
         "eval_prompt_content": eval_prompt.content,
         "processed_count": 0
     }
