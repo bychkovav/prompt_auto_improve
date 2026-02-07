@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
-from src.models.prompt_version import PromptVersion
-from src.models.run import Run
+from models.prompt_version import PromptVersion
+from models.run import Run
 from sqlalchemy.exc import NoResultFound
 
 

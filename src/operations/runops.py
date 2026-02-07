@@ -1,6 +1,6 @@
-from src.models.eval_prompt import EvalPrompt
-from src.models.prompt_version import PromptVersion
-from src.models.run import Run
+from models.eval_prompt import EvalPrompt
+from models.prompt_version import PromptVersion
+from models.run import Run
 from sqlalchemy import select, exists, and_
 from sqlalchemy.exc import NoResultFound
 

@@ -1,11 +1,11 @@
 from sqlalchemy import select
-from src.models.entry import Entry
-from src.models.evaluation import Evaluation
-from src.models.prompt_version import PromptVersion
-from src.models.response import Response
+from models.entry import Entry
+from models.evaluation import Evaluation
+from models.prompt_version import PromptVersion
+from models.response import Response
 from sqlalchemy.exc import NoResultFound
 
-from src.models.run import Run
+from models.run import Run
 
 def create_response(session, run_id: str, entry_id: str, content: str) -> str:
     r = Response(run_id=run_id, entry_id=entry_id)

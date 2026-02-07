@@ -1,4 +1,4 @@
-from src.models.evaluation import Evaluation
+from models.evaluation import Evaluation
 
 
 def create_evaluation(session, response_id: str, score: dict) -> str:

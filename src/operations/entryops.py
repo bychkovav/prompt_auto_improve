@@ -1,6 +1,7 @@
 from sqlalchemy import select
+from typing import Optional
 
-from src.models.entry import Entry
+from models.entry import Entry
 
 def get_next_entry(session, skip: int) -> Optional[dict]:
     q = (
