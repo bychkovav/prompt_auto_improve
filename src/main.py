@@ -15,8 +15,8 @@ from graph.flow import get_graph
 async def main():
     graph = get_graph()
     await graph.ainvoke({
-        "initial_prompt_id": "",
-        "eval_prompt_id": "",
+        "initial_prompt_id": "418a5e54-d013-4056-9df3-ca9ed07ecde8",
+        "eval_prompt_id": "3f9f5c00-3da7-4ae6-916d-ac73e0222ff8",
     })
 
 if __name__ == "__main__":

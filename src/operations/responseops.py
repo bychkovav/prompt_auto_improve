@@ -7,7 +7,7 @@ from sqlalchemy.exc import NoResultFound
 
 from models.run import Run
 
-def create_response(session, run_id: str, entry_id: str, content: str) -> str:
+def create_response(session, run_id: str, entry_id: str) -> str:
     r = Response(run_id=run_id, entry_id=entry_id)
     session.add(r)
     session.commit()

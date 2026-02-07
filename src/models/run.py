@@ -11,7 +11,7 @@ class Run(Base, TimestampMixin):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     initial_prompt_id = Column(UUID(as_uuid=True), ForeignKey('prompt_version.id', ondelete='CASCADE'), nullable=False)
-    result_prompt_id = Column(UUID(as_uuid=True), ForeignKey('prompt_version.id', ondelete='CASCADE'), nullable=False)
+    result_prompt_id = Column(UUID(as_uuid=True), ForeignKey('prompt_version.id', ondelete='CASCADE'), nullable=True)
     eval_prompt_id = Column(UUID(as_uuid=True), ForeignKey('eval_prompt.id', ondelete='CASCADE'), nullable=False)
 
     # Relationships

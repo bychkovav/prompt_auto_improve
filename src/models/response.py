@@ -12,7 +12,7 @@ class Response(Base, TimestampMixin):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     run_id = Column(UUID(as_uuid=True), ForeignKey('run.id', ondelete='CASCADE'), nullable=False)
     entry_id = Column(UUID(as_uuid=True), ForeignKey('entry.id', ondelete='CASCADE'), nullable=False)
-    content = Column(Text, nullable=False)
+    content = Column(Text, nullable=True)
 
     # Relationships
     run = relationship('Run', back_populates='responses')

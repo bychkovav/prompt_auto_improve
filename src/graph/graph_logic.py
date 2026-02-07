@@ -22,11 +22,11 @@ meta_llm = ChatOpenAI(model="gpt-4o-mini", api_key=openai_api_key)
 async def create_run_node(state: State) -> dict:
     with get_session() as session:
         out = create_run(session, state["initial_prompt_id"], state["eval_prompt_id"])
-    return {"run_id": out["run_id"], "processed_count": 0}
+    return {"run_id": out["run_id"], "processed_count": 0, "initial_prompt_content": out["initial_prompt_content"], "eval_prompt_content": out["eval_prompt_content"]}
 
 async def get_next_entry_node(state: State) -> dict:
     with get_session() as session:
-        nxt = get_next_entry(session, state["run_id"])
+        nxt = get_next_entry(session, state["processed_count"])
     if not nxt:
         return {"entry_id": None, "entry_content": None}
     return {"entry_id": nxt["entry_id"], "entry_content": nxt["entry_content"]}
@@ -34,7 +34,7 @@ async def get_next_entry_node(state: State) -> dict:
 async def generate_and_store_node(state: State) -> dict:
     run_id = state["run_id"]
     entry_id = state["entry_id"]
-    prompt = state["result_prompt_content"]
+    prompt = state["initial_prompt_content"]
     entry_content = state["entry_content"]
 
     with get_session() as session:
@@ -43,7 +43,7 @@ async def generate_and_store_node(state: State) -> dict:
     output = (await gen_llm.ainvoke([
         # system prompt = prompt version
         {"role": "system", "content": prompt},
-        {"role": "user", "content": entry_content},
+        {"role": "user", "content": "Journal entry is a <<TEXT>>:{}  <<History>> : {}  <<RecentResponses>>: {}".format(entry_content, "", "") },
     ])).content
 
     with get_session() as session:
