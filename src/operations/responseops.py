@@ -22,10 +22,10 @@ def set_content(session, response_id: str, content: str) -> None:
     r.content = content
     session.commit()
 
-def sample_recent_examples(session, eval_prompt_id: str, k_runs: int = 3, n_samples: int = 3):
+def sample_recent_examples(session,current_run_id: str, eval_prompt_id: str, k_runs: int = 3, n_samples: int = 3):
     runs = session.execute(
         select(Run)
-        .where(Run.eval_prompt_id == eval_prompt_id)
+        .where(Run.eval_prompt_id == eval_prompt_id and Run.id != current_run_id)
         .order_by(Run.created_date.desc())
         .limit(k_runs)
     ).scalars().all()
@@ -37,6 +37,7 @@ def sample_recent_examples(session, eval_prompt_id: str, k_runs: int = 3, n_samp
     for run in runs:
         rows = session.execute(
             select(PromptVersion, Response, Entry, Evaluation)
+            .select_from(Run)
             .join(Response, Response.run_id == Run.id)
             .join(Entry, Entry.id == Response.entry_id)
             .join(Evaluation, Evaluation.response_id == Response.id)
